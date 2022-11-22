@@ -10,7 +10,9 @@ def exctinction_R136(waves,Rv):
     Rv dependent extinction law tailored to the cluster R136 in the
     Large Magellanic Cloud, where a strong gradient in Rv values is observed.
 
-    - Optical and NIR part as in Fitzpatrick (1999).
+    - Optical and NIR part as in Fitzpatrick (1999)
+    - Spline point values from Goddard IDL Astrolib routine FM_UNRED
+      https://idlastro.gsfc.nasa.gov/ftp/pro/astro/fm_unred.pro
     - UV part of the curve tailored to R136.
 
     [Input]
@@ -56,7 +58,7 @@ def exctinction_R136(waves,Rv):
     if (len(iuv) > 0):
         curve[iuv] = yuv[2::]
 
-    # Optical and NIR spline points and anchors as in Fitzpatrick (1999)
+    # Optical and NIR spline points as in Fitzpatrick (1999), and FM_UNRED
     spline_arr = 10000.0/np.array([26500.0,12200.0,6000.0,5470.0,4670.0,4110.0])
     xsplopir = np.concatenate(([0],spline_arr))
     ysplir = np.array([0.0,0.26469,0.82925])*Rv/3.1
