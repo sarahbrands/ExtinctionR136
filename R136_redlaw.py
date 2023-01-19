@@ -3,9 +3,8 @@ import scipy.interpolate as interpolate
 
 def exctinction_R136(waves,Rv):
     """
-    R5495 (= approx Rv) dependent extinction law tailored to the cluster R136
-    in the Large Magellanic Cloud, where a strong gradient in R5495 values is
-    observed.
+    Extinction law tailored to the cluster R136 in the Large Magellanic Cloud,
+    where a strong gradient in R5495 values is observed.
     - Shape of the optical and NIR part as in Maiz-Apellaniz et al. (2014),
       but parameterised in a way similar to that of Fitzpatrick (1999).
     - UV part of the curve tailored to R136.
@@ -52,9 +51,8 @@ def exctinction_R136(waves,Rv):
         curve[iuv] = yuv[2::]
 
     # Optical and NIR spline points
-    spline_arr = 10000.0/np.array([26500.0, 18000.0, 12200.0, 10000.0, 8696.0,
-        5495.0, 4670.0, 4405.0, 4110.0, 3704.0, 3304.0])
-    xsplopir = np.concatenate(([0],spline_arr))
+    xsplopir = np.concatenate(([0],10000.0/np.array([26500.0, 18000.0, 12200.0,
+        10000.0, 8696.0, 5495.0, 4670.0, 4405.0, 4110.0, 3704.0, 3304.0])))
     ysplopir = np.array((np.polyval([-0.1097 ,0.1195][::-1], Rv),
             np.polyval([-0.2046 ,0.2228][::-1], Rv),
             np.polyval([-0.3826 ,0.4167][::-1], Rv),
@@ -66,8 +64,6 @@ def exctinction_R136(waves,Rv):
             np.polyval([1.3149 ,0.9887][::-1], Rv),
             np.polyval([1.7931 ,0.9661][::-1], Rv),
             np.polyval([2.2580 ,0.9689][::-1], Rv)))
-
-
     ysplopir = np.concatenate((np.array([0]),ysplopir))
 
     # If the wavelength range covers optical/NIR, interpolate from UV to optical
